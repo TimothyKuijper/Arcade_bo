@@ -43,7 +43,8 @@ public class PlayerBehavior : MonoBehaviour
             rb2d.AddForce(new Vector2(0f, moveVertical * jumpforce), ForceMode2D.Impulse);
         }
 
-        if (rb2d.velocity.magnitude > maxSpeed)
+        if (rb2d.velocity.magnitude
+            > maxSpeed)
         {
             rb2d.velocity = Vector2.ClampMagnitude(rb2d.velocity, maxSpeed);
         }

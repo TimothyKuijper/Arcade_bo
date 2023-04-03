@@ -7,12 +7,12 @@ public class EnemyMovement : MonoBehaviour
     public float xmin;
     public float xmax;
     public int Direction;
-    float Speed;
+    public float Speed;
 
 
     void Start()
     {
-        Speed = 0.05f;
+        Speed = 0.01f;
     }
 
     

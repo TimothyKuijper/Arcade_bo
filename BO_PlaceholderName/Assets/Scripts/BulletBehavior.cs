@@ -9,6 +9,7 @@ public class BulletBehavior : MonoBehaviour
 {
     Rigidbody2D Rigidbody;
     bool isFired;
+    private Vector3 shotMultiplier;
     public Vector3 ScreenPos;
     public Vector3 WorldPos;
 
@@ -16,6 +17,8 @@ public class BulletBehavior : MonoBehaviour
     {
        Rigidbody = GetComponent<Rigidbody2D>();
         isFired = false;
+        Destroy(gameObject, 1.5f);
+        shotMultiplier = new Vector3(10, 10);
     }
 
     void Update()
@@ -30,7 +33,7 @@ public class BulletBehavior : MonoBehaviour
         ScreenPos = Input.mousePosition;
         ScreenPos.z = Camera.main.nearClipPlane + 1;
 
-        Vector3 Shot = WorldPos - transform.position;
+        Vector3 Shot = (WorldPos + shotMultiplier) - transform.position;
 
         if (isFired == false)
         {
@@ -43,8 +46,4 @@ public class BulletBehavior : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        Destroy(gameObject);
-    }
 }
