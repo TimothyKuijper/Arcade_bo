@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerBehavior : MonoBehaviour
 {
-    private Rigidbody2D rb2d;
+    public Rigidbody2D rb2d;
     private ScoreManager scoreManager;
 
     float movespeed;
@@ -17,9 +17,8 @@ public class PlayerBehavior : MonoBehaviour
     void Start()
     {
         scoreManager = GameObject.Find("Canvas").GetComponent<ScoreManager>();
-        rb2d = gameObject.GetComponent<Rigidbody2D>();
         maxSpeed = 30f;
-        movespeed = 0.6f;
+        movespeed = 100f;
         jumpforce = 10f;
         isjumping = false;
     }
@@ -34,17 +33,17 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (moveHorizontal > 0.1f || moveHorizontal < -0.1f)
         {
-
-            rb2d.AddForce(new Vector2(moveHorizontal * movespeed, 0f), ForceMode2D.Impulse);
+            Debug.Log("HOR");
+            rb2d.AddForce(new Vector3(moveHorizontal * movespeed, 0), ForceMode2D.Impulse);
         }
 
         if (!isjumping && moveVertical > 0.1f)
         {
-            rb2d.AddForce(new Vector2(0f, moveVertical * jumpforce), ForceMode2D.Impulse);
+            Debug.Log("JMP");
+            rb2d.AddForce(new Vector3(0f, moveVertical * jumpforce), ForceMode2D.Impulse);
         }
 
-        if (rb2d.velocity.magnitude
-            > maxSpeed)
+        if (rb2d.velocity.magnitude > maxSpeed)
         {
             rb2d.velocity = Vector2.ClampMagnitude(rb2d.velocity, maxSpeed);
         }
